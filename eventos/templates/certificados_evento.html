@@ -19,7 +19,7 @@
                 <img width="100%" src="/media/{{evento.logo}}">
                 <br>
                 <br>
-                <h3>{{ evento.nome }}</h3>
+                <h3>{{evento.nome}}</h3>
                 
             </div>
 
@@ -41,33 +41,21 @@
         <hr>
 
         <div class="row">
-            <h5>{{evento.participantes.all.count}} Participantes</h5>
-            
-            <div class="col-md-4">
-                <table>
-                    <tr>
-                        <th>Nome</th>
-                        <th>E-mail</th>
-                    </tr>
-                    {% for participante in participantes %}
-                        <tr class="{% cycle 'linha' 'linha2' %}">
-                            <td>{{ participante.username }}</td>
-                            <td>{{ participante.email }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-                <br>
-                <div class="row">
-                    <div class="col-md text-center">
-                        <p>X de Z</p>
-                    </div>
+            <h5>{{qtd_certificados}} Certificados para serem gerados</h5>
+            {% if qtd_certificados > 0 %}
+                <a href="{% url 'gerar_certificado' evento.id %}" class="btn-principal link" style="width: 40%">GERAR TODOS OS CERTIFICADOS</a>
+            {% endif %}
+        </div>
+        <hr>
 
-                    <div class="col-md ">
-                        <a href="{% url 'gerar_csv' evento.id %}" class="btn-principal" style="text-decoration: none;">Exportar CSV</a>
-                    </div>
-                </div>
-            </div>
-        
+        <div class="row">
+            <h5>Procurar certificado</h5>
+            <br>
+            <form action="{% url 'procurar_certificado' evento.id %}" method="POST">{% csrf_token %}
+                <input type="email" class="form-control" placeholder="Digite o e-mail" name="email">
+                <br>
+                <input type="submit" value="BUSCAR" class="btn btn-primary">
+            </form>
         </div>
         
         

@@ -9,5 +9,6 @@ urlpatterns = [
     path('', lambda request: redirect('/usuarios/login/')),
     path('usuarios/', include('usuarios.urls')),
     path('eventos/', include('eventos.urls')),
+    path('clientes/', include('clientes.urls')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
